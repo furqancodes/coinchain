@@ -10,6 +10,7 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 const App = () => {
   const [data, setData] = useState("");
+  const [token, setToken] = useState("");
   const [Error, setError] = useState("");
   const onformSubmit = async ({ name, age, email, password }) => {
     try {
@@ -21,6 +22,7 @@ const App = () => {
       });
       console.log(response);
       setData(response.data);
+      setToken(response.data.token);
     } catch (error) {
       if (error.response.data.code === 11000) {
         setError("Email Already exists");
@@ -31,13 +33,33 @@ const App = () => {
       }
     }
   };
-  const userData = () => {
+  const onlogin = async ({ email, password }) => {
+    try {
+      const response = await UserApi.post("/login", {
+        email,
+        password,
+      });
+      console.log(response);
+      setData(response.data);
+      setToken(response.data.token);
+    } catch (error) {
+      // if (error.response.data.code === 11000) {
+      //   setError("Email Already exists");
+      //   setData("");
+      // } else {
+      setError("some error occured");
+      // }
+    }
+  };
+  const userData = ({ message }) => {
     if (data) {
       return (
         <div class="ui positive message four wide">
           <i class="close icon"></i>
           <div class="header">Successful</div>
-          <p>Congratulation {data.user.name} account is created</p>
+          <p>
+            Congratulation {data.user.name} {message}
+          </p>
         </div>
       );
     } else if (Error && !data) {
@@ -56,7 +78,9 @@ const App = () => {
         <Nav />
         <Switch>
           <Route path="/" exact component={Home} />
-          <Route path="/login" component={Login} />
+          <Route path="/login">
+            <Login onlogin={onlogin} view={userData} />
+          </Route>
           <Route path="/signup">
             <Signup onformSubmit={onformSubmit} view={userData} />
           </Route>
