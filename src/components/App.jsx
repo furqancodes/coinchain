@@ -2,6 +2,11 @@ import React, { useState } from "react";
 
 import UserApi from "./Api/UserApi";
 import Signup from "./Signup";
+import Home from "./Home";
+import Login from "./Login";
+import Nav from "./Nav";
+
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 const App = () => {
   const [data, setData] = useState("");
@@ -46,10 +51,18 @@ const App = () => {
     }
   };
   return (
-    <div className="ui container">
-      <Signup onformSubmit={onformSubmit} />
-      {userData()}
-    </div>
+    <Router>
+      <div>
+        <Nav />
+        <Switch>
+          <Route path="/" exact component={Home} />
+          <Route path="/login" component={Login} />
+          <Route path="/signup">
+            <Signup onformSubmit={onformSubmit} view={userData} />
+          </Route>
+        </Switch>
+      </div>
+    </Router>
   );
 };
 
