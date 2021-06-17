@@ -5,8 +5,15 @@ import Signup from "./Signup";
 import Home from "./Home";
 import Login from "./Login";
 import Nav from "./Nav";
+import Profile from "./User/Profile";
+// import Logout from "./Logout";
 
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Redirect,
+} from "react-router-dom";
 
 const App = () => {
   const [data, setData] = useState("");
@@ -39,7 +46,7 @@ const App = () => {
         email,
         password,
       });
-      console.log(response);
+      console.log("LOGGED IN");
       setData(response.data);
       setToken(response.data.token);
     } catch (error) {
@@ -47,7 +54,7 @@ const App = () => {
       //   setError("Email Already exists");
       //   setData("");
       // } else {
-      setError("some error occured");
+      setError("some error occurred");
       // }
     }
   };
@@ -75,14 +82,25 @@ const App = () => {
   return (
     <Router>
       <div>
-        <Nav />
+        <Nav
+          login={data ? true : false}
+          setData={setData}
+          setToken={setToken}
+        />
         <Switch>
           <Route path="/" exact component={Home} />
           <Route path="/login">
-            <Login onlogin={onlogin} view={userData} />
+            {token ? (
+              <Redirect to="/user/profile" />
+            ) : (
+              <Login onlogin={onlogin} view={userData} />
+            )}
           </Route>
           <Route path="/signup">
             <Signup onformSubmit={onformSubmit} view={userData} />
+          </Route>
+          <Route path="/user/profile">
+            {data === "" ? <Redirect to="/" /> : <Profile data={data} />}
           </Route>
         </Switch>
       </div>
