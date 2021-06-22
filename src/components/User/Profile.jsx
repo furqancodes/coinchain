@@ -2,8 +2,9 @@
 import React from "react";
 import "../../css/Login.css";
 
-const Profile = ({ data }) => {
+const Profile = ({ data, userProfile }) => {
   console.log(data);
+  userProfile();
   return (
     <div class="ui container top-10">
       <div class="ui middle aligned center aligned grid">

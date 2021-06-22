@@ -58,6 +58,18 @@ const App = () => {
       // }
     }
   };
+  const userProfile = async () => {
+    try {
+      const response = await UserApi.get("/me", {
+        headers: {
+          authorization: `Bearer ${token}`,
+        },
+      });
+      console.log(response);
+    } catch (error) {
+      console.log(error);
+    }
+  };
   const userData = ({ message }) => {
     if (data) {
       return (
@@ -86,6 +98,7 @@ const App = () => {
           login={data ? true : false}
           setData={setData}
           setToken={setToken}
+          token={token}
         />
         <Switch>
           <Route path="/" exact component={Home} />
@@ -100,7 +113,11 @@ const App = () => {
             <Signup onformSubmit={onformSubmit} view={userData} />
           </Route>
           <Route path="/user/profile">
-            {data === "" ? <Redirect to="/" /> : <Profile data={data} />}
+            {data === "" ? (
+              <Redirect to="/" />
+            ) : (
+              <Profile data={data} userProfile={userProfile} />
+            )}
           </Route>
         </Switch>
       </div>
