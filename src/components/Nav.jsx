@@ -4,7 +4,7 @@ import UserApi from "./Api/UserApi";
 
 import "../css/Navigation.css";
 
-const Nav = ({ login, setData, setToken, token }) => {
+const Nav = ({ login, setData, setToken, setWallet, token }) => {
   const toggle = () => {
     if (!login) {
       return (
@@ -53,6 +53,9 @@ const Nav = ({ login, setData, setToken, token }) => {
     } else {
       const setNull = () => {
         try {
+          setWallet("");
+          setData("");
+          setToken("");
           UserApi.post(
             "/logoutAll",
             {},
@@ -62,8 +65,6 @@ const Nav = ({ login, setData, setToken, token }) => {
               },
             }
           );
-          setData("");
-          setToken("");
         } catch (error) {
           console.log(error);
         }
@@ -106,7 +107,7 @@ const Nav = ({ login, setData, setToken, token }) => {
             <Link to="/user/profile">
               <li>Profile</li>
             </Link>
-            <Link to="/user/logout">
+            <Link to="/">
               <li onClick={setNull}>Logout</li>
             </Link>
           </ul>

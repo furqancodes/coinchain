@@ -1,10 +1,13 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import React from "react";
+import React, { useEffect } from "react";
 import "../../css/Login.css";
 
-const Profile = ({ data, userProfile }) => {
-  console.log(data);
-  userProfile();
+const Profile = ({ data, userProfile, wallet }) => {
+  // console.log(data);
+  console.log(wallet);
+  useEffect(() => {
+    userProfile();
+  }, []);
   return (
     <div class="ui container top-10">
       <div class="ui middle aligned center aligned grid">
@@ -18,12 +21,7 @@ const Profile = ({ data, userProfile }) => {
               {data.user.name} is an art director living in New York.
             </div>
           </div>
-          <div class="extra content">
-            <a>
-              <i class="user icon"></i>
-              22 Friends
-            </a>
-          </div>
+          <div class="extra content">Balance {wallet.balance}</div>
         </div>
       </div>
     </div>

@@ -16,6 +16,7 @@ import {
 } from "react-router-dom";
 
 const App = () => {
+  const [wallet, setWallet] = useState("");
   const [data, setData] = useState("");
   const [token, setToken] = useState("");
   const [Error, setError] = useState("");
@@ -65,6 +66,7 @@ const App = () => {
           authorization: `Bearer ${token}`,
         },
       });
+      setWallet(response.data.wallet);
       console.log(response);
     } catch (error) {
       console.log(error);
@@ -98,6 +100,7 @@ const App = () => {
           login={data ? true : false}
           setData={setData}
           setToken={setToken}
+          setWallet={setWallet}
           token={token}
         />
         <Switch>
@@ -116,7 +119,7 @@ const App = () => {
             {data === "" ? (
               <Redirect to="/" />
             ) : (
-              <Profile data={data} userProfile={userProfile} />
+              <Profile data={data} userProfile={userProfile} wallet={wallet} />
             )}
           </Route>
         </Switch>
