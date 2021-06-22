@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { APP_URL } from "../config";
 
 import "../css/Login.css";
 
@@ -17,8 +18,8 @@ const Login = ({ onlogin, view }) => {
           <h2 class="ui image header">
             <div class="content">Log-in to your account</div>
           </h2>
-          <form class="ui large form" onSubmit={onFormSubmit}>
-            <div class="ui stacked secondary  segment">
+          <form class="ui large form border-radius" onSubmit={onFormSubmit}>
+            <div class="ui stacked secondary black segment">
               <div class="field">
                 <div class="ui left icon input">
                   <i class="user icon"></i>
@@ -47,7 +48,7 @@ const Login = ({ onlogin, view }) => {
                   />
                 </div>
               </div>
-              <button type="submit" class="ui fluid large teal submit button">
+              <button type="submit" class="ui fluid large black submit button">
                 Login
               </button>
             </div>
@@ -56,7 +57,7 @@ const Login = ({ onlogin, view }) => {
           </form>
 
           <div class="ui message">
-            New to us? <a href="http://localhost:3000/signup">signup</a>
+            New to us? <a href={APP_URL + "/signup"}>signup</a>
           </div>
         </div>
       </div>

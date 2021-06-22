@@ -10,3 +10,7 @@ body > .grid {
 .top-10 {
   margin-top: 10rem;
 }
+.border-radius {
+  border-radius: 0px;
+  box-shadow: inset;
+}

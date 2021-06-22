@@ -19,7 +19,8 @@ const App = () => {
   const [wallet, setWallet] = useState("");
   const [data, setData] = useState("");
   const [token, setToken] = useState("");
-  const [Error, setError] = useState("");
+  const [error, setError] = useState("");
+  console.log(error);
   const onformSubmit = async ({ name, age, email, password }) => {
     try {
       const response = await UserApi.post("/signup", {
@@ -28,9 +29,8 @@ const App = () => {
         age,
         password,
       });
-      console.log(response);
       setData(response.data);
-      setToken(response.data.token);
+      console.log(response);
     } catch (error) {
       if (error.response.data.code === 11000) {
         setError("Email Already exists");
@@ -83,12 +83,12 @@ const App = () => {
           </p>
         </div>
       );
-    } else if (Error && !data) {
+    } else if (error) {
       return (
         <div class="ui negative message four wide">
           <i class="close icon"></i>
           <div class="header">ERROR</div>
-          <p>{Error}</p>
+          <p>{error}</p>
         </div>
       );
     }
@@ -97,7 +97,7 @@ const App = () => {
     <Router>
       <div>
         <Nav
-          login={data ? true : false}
+          login={token ? true : false}
           setData={setData}
           setToken={setToken}
           setWallet={setWallet}
@@ -113,7 +113,11 @@ const App = () => {
             )}
           </Route>
           <Route path="/signup">
-            <Signup onformSubmit={onformSubmit} view={userData} />
+            <Signup
+              onformSubmit={onformSubmit}
+              view={userData}
+              setError={setError}
+            />
           </Route>
           <Route path="/user/profile">
             {data === "" ? (

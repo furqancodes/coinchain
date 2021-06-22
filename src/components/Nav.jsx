@@ -35,18 +35,22 @@ const Nav = ({ login, setData, setToken, setWallet, token }) => {
         //     </ul>
         //   </div>
         // </nav>
-        <nav>
-          <h2>CoinChain</h2>
+        <nav class="ui inverted menu">
+          <div className="logo">
+            <h2>CoinChain</h2>
+          </div>
           <ul class="nav-links">
-            <Link to="/">
+            <Link to="/" class="item">
               <li>Home</li>
             </Link>
-            <Link to="/signup">
-              <li>Signup</li>
-            </Link>
-            <Link to="/login">
-              <li>Login</li>
-            </Link>
+            <div class="right menu">
+              <Link to="/signup" class="item">
+                <li>Signup</li>
+              </Link>
+              <Link to="/login" class="item">
+                <li>Login</li>
+              </Link>
+            </div>
           </ul>
         </nav>
       );
@@ -98,18 +102,22 @@ const Nav = ({ login, setData, setToken, setWallet, token }) => {
         //     </ul>
         //   </div>
         // </nav>
-        <nav>
-          <h2>CoinChain</h2>
+        <nav class="ui inverted menu">
+          <div className="logo">
+            <h2>CoinChain</h2>
+          </div>
           <ul class="nav-links">
-            <Link to="/">
+            <Link to="/" class="item">
               <li>Home</li>
             </Link>
-            <Link to="/user/profile">
-              <li>Profile</li>
-            </Link>
-            <Link to="/">
-              <li onClick={setNull}>Logout</li>
-            </Link>
+            <div class="right menu">
+              <Link to="/user/profile" class="item">
+                <li>Profile</li>
+              </Link>
+              <Link to="/" class="item">
+                <li onClick={setNull}>Logout</li>
+              </Link>
+            </div>
           </ul>
         </nav>
       );
