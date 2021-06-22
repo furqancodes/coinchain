@@ -19,7 +19,7 @@ const Login = ({ onlogin, view }) => {
             <div class="content">Log-in to your account</div>
           </h2>
           <form class="ui large form border-radius" onSubmit={onFormSubmit}>
-            <div class="ui stacked secondary black segment">
+            <div class="ui stacked secondary segment">
               <div class="field">
                 <div class="ui left icon input">
                   <i class="user icon"></i>

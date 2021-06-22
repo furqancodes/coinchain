@@ -23,8 +23,8 @@ const Signup = ({ onformSubmit, view, setError }) => {
           <h2 class="ui image header">
             <div class="content">Create your account</div>
           </h2>
-          <form onSubmit={onFormSubmit} class="ui large form">
-            <div class="ui stacked secondary black segment">
+          <form onSubmit={onFormSubmit} class="ui large form border-radius">
+            <div class="ui stacked secondary segment">
               <h3>Sign Up</h3>
               <div class="required field">
                 <input
