@@ -1,3 +1,52 @@
 .column {
   max-width: 450px;
 }
+.width-50 {
+  background-color: aliceblue;
+  width: 70%;
+  padding: 20%;
+  border: rgb(97, 97, 97) 2px solid;
+
+  box-shadow: 0 1px 3px 2px rgba(0, 0, 0, 0.12),
+    0 1px 2px 2px rgba(0, 0, 0, 0.24);
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+.center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  border: springgreen 2px solid;
+}
+.shift-left {
+  padding: 0%;
+}
+.form {
+  width: 100%;
+}
+.input {
+  border: none;
+  width: 100%;
+}
+.addform {
+  width: 70%;
+}
+.addinput {
+  border: none;
+  width: 60%;
+  height: 100%;
+  box-shadow: 0 1px 3px 2px rgba(0, 0, 0, 0.12),
+    0 1px 2px 2px rgba(0, 0, 0, 0.24);
+}
+.wf {
+  width: 100%;
+  height: 34px;
+}
+.p{
+  width:10px;
+  margin:0px
+}
+.w5{
+  width: 50%;
+  margin: 0px;
+}

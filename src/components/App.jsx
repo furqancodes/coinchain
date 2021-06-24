@@ -6,6 +6,7 @@ import Home from "./Home";
 import Login from "./Login";
 import Nav from "./Nav";
 import Profile from "./User/Profile";
+import Beneficiary from "./User/Beneficiary";
 // import Logout from "./Logout";
 
 import {
@@ -20,7 +21,7 @@ const App = () => {
   const [data, setData] = useState("");
   const [token, setToken] = useState("");
   const [error, setError] = useState("");
-  console.log(error);
+  // console.log(error);
   const onformSubmit = async ({ name, age, email, password }) => {
     try {
       const response = await UserApi.post("/signup", {
@@ -29,7 +30,7 @@ const App = () => {
         age,
         password,
       });
-      setData(response.data);
+      setData(response.data.user);
       console.log(response);
     } catch (error) {
       if (error.response.data.code === 11000) {
@@ -48,7 +49,8 @@ const App = () => {
         password,
       });
       console.log("LOGGED IN");
-      setData(response.data);
+      console.log(response.data)
+      setData(response.data.user);
       setToken(response.data.token);
     } catch (error) {
       // if (error.response.data.code === 11000) {
@@ -67,11 +69,27 @@ const App = () => {
         },
       });
       setWallet(response.data.wallet);
-      console.log(response);
+      // console.log(response);
     } catch (error) {
       console.log(error);
     }
   };
+  const addBeneficiary = async(inputValue,token)=>{
+    const response = await UserApi.patch(
+      "/me",
+      {
+        beneficiary: inputValue,
+      },
+      {
+        headers: {
+          authorization: `Bearer ${token}`,
+        },
+      }
+    );
+    
+    return response
+    // setData(response.data)
+  }
   const userData = ({ message }) => {
     if (data) {
       return (
@@ -79,7 +97,7 @@ const App = () => {
           <i class="close icon"></i>
           <div class="header">Successful</div>
           <p>
-            Congratulation {data.user.name} {message}
+            Congratulation {data.name} {message}
           </p>
         </div>
       );
@@ -124,6 +142,13 @@ const App = () => {
               <Redirect to="/" />
             ) : (
               <Profile data={data} userProfile={userProfile} wallet={wallet} />
+            )}
+          </Route>
+          <Route path="/beneficiary">
+            {data === "" ? (
+              <Redirect to="/" />
+            ) : (
+              <Beneficiary data={data} token={token} setData={setData} addBeneficiary={addBeneficiary} />
             )}
           </Route>
         </Switch>

@@ -110,6 +110,9 @@ const Nav = ({ login, setData, setToken, setWallet, token }) => {
             <Link to="/" class="item">
               <li>Home</li>
             </Link>
+            <Link to="/beneficiary" class="item">
+              <li>Beneficiary</li>
+            </Link>
             <div class="right menu">
               <Link to="/user/profile" class="item">
                 <li>Profile</li>
