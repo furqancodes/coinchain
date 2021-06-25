@@ -13,6 +13,8 @@ const Signup = ({ onformSubmit, view, setError }) => {
     if (name === "" || age === "" || email === "" || password === "") {
       setError("Please complete form");
     } else {
+      setError("");
+
       onformSubmit({ name, email, age, password });
     }
   };

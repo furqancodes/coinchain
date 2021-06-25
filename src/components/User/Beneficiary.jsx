@@ -1,30 +1,47 @@
 import React, { useState } from "react";
 import "../../css/Signup.css";
 
-const Beneficiary = ({ data, token, setData, addBeneficiary }) => {
+const Beneficiary = ({
+  data,
+  token,
+  setData,
+  addBeneficiary,
+  deleteBeneficiary,
+}) => {
   // console.log(data);
   const [inputValue, setInputValue] = useState("");
   const onSubmit = async (e) => {
     e.preventDefault();
     const response = await addBeneficiary(inputValue, token);
     // setData(response.data)
-    console.log("add beneficiary");
-    console.log(response);
+    // console.log("add beneficiary");
+    // console.log(response);
     if (response.data) {
       setData(response.data);
     }
     setInputValue("");
   };
+  const onDelete = async (beneficiary) => {
+    const response = await deleteBeneficiary(beneficiary);
+    if (response.data) {
+      setData(response.data);
+    }
+  };
   const renderBeneficiary = () => {
     if (data.beneficiaries.length > 0) {
-      console.log();
       const lists = data.beneficiaries.map((block) => {
         return (
           <div class="item">
             <div class="content w5">
               <p class="p">{block.beneficiary}</p>
             </div>
-            <button class="ui right floated button">Right Floated</button>
+            <button
+              onClick={() => onDelete(block.beneficiary)}
+              class="ui right floated red small button"
+            >
+              Delete
+            </button>
+            <button class="ui right floated blue small button">Transact</button>
           </div>
         );
       });

@@ -33,9 +33,11 @@ const App = () => {
       setData(response.data.user);
       console.log(response);
     } catch (error) {
-      if (error.response.data.code === 11000) {
-        setError("Email Already exists");
-        setData("");
+      if (error.response.data) {
+        if (error.response.data.code === 11000) {
+          setError("Email Already exists");
+          setData("");
+        }
       } else {
         console.log(error.response);
         setError(error.response.data.message);
@@ -49,7 +51,7 @@ const App = () => {
         password,
       });
       console.log("LOGGED IN");
-      console.log(response.data)
+      console.log(response.data);
       setData(response.data.user);
       setToken(response.data.token);
     } catch (error) {
@@ -74,7 +76,7 @@ const App = () => {
       console.log(error);
     }
   };
-  const addBeneficiary = async(inputValue,token)=>{
+  const addBeneficiary = async (inputValue, token) => {
     const response = await UserApi.patch(
       "/me",
       {
@@ -86,10 +88,23 @@ const App = () => {
         },
       }
     );
-    
-    return response
+
+    return response;
     // setData(response.data)
-  }
+  };
+  const deleteBeneficiary = async (beneficiaryEmail) => {
+    // console.log(token);
+    const response = await UserApi.delete("/beneficiary/:", {
+      params: {
+        beneficiary: beneficiaryEmail,
+      },
+      headers: {
+        authorization: `Bearer ${token}`,
+      },
+    });
+    // console.log(response);
+    return response;
+  };
   const userData = ({ message }) => {
     if (data) {
       return (
@@ -148,7 +163,13 @@ const App = () => {
             {data === "" ? (
               <Redirect to="/" />
             ) : (
-              <Beneficiary data={data} token={token} setData={setData} addBeneficiary={addBeneficiary} />
+              <Beneficiary
+                data={data}
+                token={token}
+                setData={setData}
+                addBeneficiary={addBeneficiary}
+                deleteBeneficiary={deleteBeneficiary}
+              />
             )}
           </Route>
         </Switch>
