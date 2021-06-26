@@ -53,7 +53,7 @@ const CreateTransaction = ({
                 <div class="description">Receiver: {recipientEmail}</div>
               </div>
               <div class="extra content">
-                Remaining Balance: {wallet.balance}
+                Remaining Balance: {wallet.balance - value}
               </div>
               <div>
                 <Link to="/beneficiary">

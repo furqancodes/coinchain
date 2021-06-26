@@ -6,9 +6,9 @@ const Beneficiary = ({
   data,
   token,
   setData,
+  userProfile,
   addBeneficiary,
   deleteBeneficiary,
-  transactionData,
   setTransactionData,
 }) => {
   // console.log(data);
@@ -16,7 +16,7 @@ const Beneficiary = ({
   const onSubmit = async (e) => {
     e.preventDefault();
     const response = await addBeneficiary(inputValue, token);
-    // setData(response.data)
+    setData(response.data);
     // console.log("add beneficiary");
     // console.log(response);
     if (response.data) {
@@ -51,6 +51,7 @@ const Beneficiary = ({
                     senderEmail: data.email,
                     recipientEmail: block.beneficiary,
                   });
+                  userProfile();
                 }}
                 class="ui right floated blue small button"
               >
