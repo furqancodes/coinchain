@@ -8,6 +8,7 @@ import Nav from "./Nav";
 import Profile from "./User/Profile";
 import Beneficiary from "./User/Beneficiary";
 import Transactions from "./User/Transactions";
+import CreateTransaction from "./User/CreateTransaction";
 // import Logout from "./Logout";
 
 import {
@@ -22,6 +23,7 @@ const App = () => {
   const [data, setData] = useState("");
   const [token, setToken] = useState("");
   const [error, setError] = useState("");
+  const [transactionData, setTransactionData] = useState({});
   // console.log(error);
   const onformSubmit = async ({ name, age, email, password }) => {
     try {
@@ -116,6 +118,19 @@ const App = () => {
     });
     return response;
   };
+  const sendAmount = async ({ amount, senderEmail, recipientEmail }) => {
+    // console.log(token);
+    const response = await UserApi.get(
+      "/transfer",
+      { amount, senderEmail, recipientEmail },
+      {
+        headers: {
+          authorization: `Bearer ${token}`,
+        },
+      }
+    );
+    return response;
+  };
 
   const userData = ({ message }) => {
     if (data && !error && message) {
@@ -181,11 +196,19 @@ const App = () => {
                 setData={setData}
                 addBeneficiary={addBeneficiary}
                 deleteBeneficiary={deleteBeneficiary}
+                transactionData={transactionData}
+                setTransactionData={setTransactionData}
               />
             )}
           </Route>
           <Route path="/transactions">
             <Transactions getTransactions={getTransactions} wallet={wallet} />
+          </Route>
+          <Route path="/createtransaction">
+            <CreateTransaction
+              sendAmount={sendAmount}
+              transactionData={transactionData}
+            />
           </Route>
         </Switch>
       </div>

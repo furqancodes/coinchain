@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import "../../css/Signup.css";
 
 const Beneficiary = ({
@@ -7,6 +8,8 @@ const Beneficiary = ({
   setData,
   addBeneficiary,
   deleteBeneficiary,
+  transactionData,
+  setTransactionData,
 }) => {
   // console.log(data);
   const [inputValue, setInputValue] = useState("");
@@ -41,7 +44,19 @@ const Beneficiary = ({
             >
               Delete
             </button>
-            <button class="ui right floated blue small button">Transact</button>
+            <Link to="/createtransaction">
+              <button
+                onClick={() =>
+                  setTransactionData({
+                    senderEmail: data.email,
+                    recipientEmail: block.beneficiary,
+                  })
+                }
+                class="ui right floated blue small button"
+              >
+                Transact
+              </button>
+            </Link>
           </div>
         );
       });
