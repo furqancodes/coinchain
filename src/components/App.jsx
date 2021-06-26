@@ -120,7 +120,7 @@ const App = () => {
   };
   const sendAmount = async ({ amount, senderEmail, recipientEmail }) => {
     // console.log(token);
-    const response = await UserApi.get(
+    const response = await UserApi.post(
       "/transfer",
       { amount, senderEmail, recipientEmail },
       {
@@ -208,8 +208,11 @@ const App = () => {
             <CreateTransaction
               sendAmount={sendAmount}
               transactionData={transactionData}
+              wallet={wallet}
+              setTransactionData={setTransactionData}
             />
           </Route>
+          {/* {console.log(transactionData)} */}
         </Switch>
       </div>
     </Router>

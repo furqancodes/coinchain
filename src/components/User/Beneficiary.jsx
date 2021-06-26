@@ -46,12 +46,12 @@ const Beneficiary = ({
             </button>
             <Link to="/createtransaction">
               <button
-                onClick={() =>
+                onClick={() => {
                   setTransactionData({
                     senderEmail: data.email,
                     recipientEmail: block.beneficiary,
-                  })
-                }
+                  });
+                }}
                 class="ui right floated blue small button"
               >
                 Transact
