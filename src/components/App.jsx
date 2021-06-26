@@ -196,8 +196,8 @@ const App = () => {
                 setData={setData}
                 addBeneficiary={addBeneficiary}
                 deleteBeneficiary={deleteBeneficiary}
-                transactionData={transactionData}
                 setTransactionData={setTransactionData}
+                userProfile={userProfile}
               />
             )}
           </Route>
