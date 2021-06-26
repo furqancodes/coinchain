@@ -24,7 +24,7 @@ const CreateTransaction = ({
     console.log(response);
   };
   const checkAmount = () => {
-    if (value > wallet.balance) {
+    if (value > wallet.balance || !value) {
       return (
         <div>
           <h2>Amount is Invalid</h2>
@@ -34,6 +34,7 @@ const CreateTransaction = ({
     }
   };
   const conditionalRendering = () => {
+    console.log(value);
     if (responseCode === 200) {
       return (
         <div class="h ui container top-10">
@@ -101,7 +102,7 @@ const CreateTransaction = ({
                   <button
                     type="submit"
                     class={
-                      value > wallet.balance
+                      value > wallet.balance || !value
                         ? "ui disabled button"
                         : "ui fluid large black submit button"
                     }
