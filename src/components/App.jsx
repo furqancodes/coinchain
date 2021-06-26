@@ -7,6 +7,7 @@ import Login from "./Login";
 import Nav from "./Nav";
 import Profile from "./User/Profile";
 import Beneficiary from "./User/Beneficiary";
+import Transactions from "./User/Transactions";
 // import Logout from "./Logout";
 
 import {
@@ -105,8 +106,19 @@ const App = () => {
     // console.log(response);
     return response;
   };
+
+  const getTransactions = async () => {
+    // console.log(token);
+    const response = await UserApi.get("/transactions", {
+      headers: {
+        authorization: `Bearer ${token}`,
+      },
+    });
+    return response;
+  };
+
   const userData = ({ message }) => {
-    if (data) {
+    if (data && !error && message) {
       return (
         <div class="ui positive message four wide">
           <i class="close icon"></i>
@@ -116,7 +128,7 @@ const App = () => {
           </p>
         </div>
       );
-    } else if (error) {
+    } else if (error && !data) {
       return (
         <div class="ui negative message four wide">
           <i class="close icon"></i>
@@ -171,6 +183,9 @@ const App = () => {
                 deleteBeneficiary={deleteBeneficiary}
               />
             )}
+          </Route>
+          <Route path="/transactions">
+            <Transactions getTransactions={getTransactions} wallet={wallet} />
           </Route>
         </Switch>
       </div>
