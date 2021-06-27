@@ -102,7 +102,7 @@ const CreateTransaction = ({
                   <button
                     type="submit"
                     class={
-                      value > wallet.balance || !value
+                      value > wallet.balance || !value || wallet.balance === 0
                         ? "ui disabled button"
                         : "ui fluid large black submit button"
                     }
