@@ -6,26 +6,35 @@ const Transactions = ({ getTransactions, wallet }) => {
   useEffect(() => {
     const responseFunc = async () => {
       const response = await getTransactions();
+      // console.log(response.data);
       setTransactions(response.data.transactionsList);
+      // setTimeout(() => {
+      //   setTransactions(response.data.transactionsList);
+      // }, 1000);
+      // console.log(transactions);
     };
     responseFunc();
     // setTransactions(response.data.transactionsList);
   }, []);
-  console.log(transactions);
+
   const conditionalRendering = () => {
     if (transactions) {
-      transactions.forEach((transaction) => {
-        console.log(transaction);
+      return transactions.map((transaction) => {
+        // console.log(transaction);
         return (
           <div>
             <div>{transaction.sender}</div>
             <div>{transaction.receiver}</div>
             <div>{transaction.amount}</div>
+            <div>{transaction.date}</div>
+            <div>{transaction.time}</div>
+            <div>------------------------</div>
           </div>
         );
       });
+    } else {
+      return <div>no transactions</div>;
     }
-    return <div>no transactions</div>;
   };
   return <div>{conditionalRendering()}</div>;
 };

@@ -36,6 +36,7 @@ const App = () => {
       setData(response.data.user);
       console.log(response);
     } catch (error) {
+      console.log(error.message);
       if (error.response.data) {
         if (error.response.data.code === 11000) {
           setError("Email Already exists");
@@ -117,6 +118,7 @@ const App = () => {
       },
     });
     return response;
+    // setTransactions(response.data.transactionsList);
   };
   const sendAmount = async ({ amount, senderEmail, recipientEmail }) => {
     // console.log(token);
