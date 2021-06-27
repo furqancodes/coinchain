@@ -36,15 +36,14 @@ const App = () => {
       setData(response.data.user);
       console.log(response);
     } catch (error) {
-      console.log(error.message);
+      console.log(error.response.data);
       if (error.response.data) {
-        if (error.response.data.code === 11000) {
-          setError("Email Already exists");
-          setData("");
-        }
+        setError("Email Already exists");
+        setData("");
       } else {
         console.log(error.response);
         setError(error.response.data.message);
+        setData("");
       }
     }
   };
@@ -81,19 +80,24 @@ const App = () => {
     }
   };
   const addBeneficiary = async (inputValue, token) => {
-    const response = await UserApi.patch(
-      "/me",
-      {
-        beneficiary: inputValue,
-      },
-      {
-        headers: {
-          authorization: `Bearer ${token}`,
+    try {
+      const response = await UserApi.patch(
+        "/me",
+        {
+          beneficiary: inputValue,
         },
-      }
-    );
+        {
+          headers: {
+            authorization: `Bearer ${token}`,
+          },
+        }
+      );
 
-    return response;
+      return response;
+    } catch (error) {
+      console.log(error);
+    }
+
     // setData(response.data)
   };
   const deleteBeneficiary = async (beneficiaryEmail) => {
@@ -112,12 +116,17 @@ const App = () => {
 
   const getTransactions = async () => {
     // console.log(token);
-    const response = await UserApi.get("/transactions", {
-      headers: {
-        authorization: `Bearer ${token}`,
-      },
-    });
-    return response;
+    try {
+      const response = await UserApi.get("/transactions", {
+        headers: {
+          authorization: `Bearer ${token}`,
+        },
+      });
+      return response;
+    } catch (error) {
+      console.log(error.response);
+    }
+
     // setTransactions(response.data.transactionsList);
   };
   const sendAmount = async ({ amount, senderEmail, recipientEmail }) => {
@@ -145,7 +154,7 @@ const App = () => {
           </p>
         </div>
       );
-    } else if (error && !data) {
+    } else if (error) {
       return (
         <div class="ui negative message four wide">
           <i class="close icon"></i>
@@ -161,6 +170,7 @@ const App = () => {
         <Nav
           login={token ? true : false}
           setData={setData}
+          setError={setError}
           setToken={setToken}
           setWallet={setWallet}
           token={token}
@@ -171,7 +181,7 @@ const App = () => {
             {token ? (
               <Redirect to="/user/profile" />
             ) : (
-              <Login onlogin={onlogin} view={userData} />
+              <Login setError={setError} onlogin={onlogin} view={userData} />
             )}
           </Route>
           <Route path="/signup">

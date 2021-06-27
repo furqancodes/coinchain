@@ -13,16 +13,22 @@ const Beneficiary = ({
 }) => {
   // console.log(data);
   const [inputValue, setInputValue] = useState("");
+
   const onSubmit = async (e) => {
     e.preventDefault();
-    const response = await addBeneficiary(inputValue, token);
-    setData(response.data);
-    // console.log("add beneficiary");
-    // console.log(response);
-    if (response.data) {
+
+    try {
+      const response = await addBeneficiary(inputValue, token);
       setData(response.data);
+      // console.log("add beneficiary");
+      // console.log(response);
+      if (response.data) {
+        setData(response.data);
+      }
+      setInputValue("");
+    } catch (error) {
+      console.log(error);
     }
-    setInputValue("");
   };
   const onDelete = async (beneficiary) => {
     const response = await deleteBeneficiary(beneficiary);
@@ -35,15 +41,6 @@ const Beneficiary = ({
       const lists = data.beneficiaries.map((block) => {
         return (
           <div class="item">
-            <div class="content w5">
-              <p class="p">{block.beneficiary}</p>
-            </div>
-            <button
-              onClick={() => onDelete(block.beneficiary)}
-              class="ui right floated red small button"
-            >
-              Delete
-            </button>
             <Link to="/createtransaction">
               <button
                 onClick={() => {
@@ -58,6 +55,15 @@ const Beneficiary = ({
                 Transact
               </button>
             </Link>
+            <button
+              onClick={() => onDelete(block.beneficiary)}
+              class="ui right floated red small button"
+            >
+              Delete
+            </button>
+            <div class="content w5">
+              <p class="p">{block.beneficiary}</p>
+            </div>
           </div>
         );
       });

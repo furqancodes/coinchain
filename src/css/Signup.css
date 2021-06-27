@@ -42,11 +42,19 @@
   width: 100%;
   height: 34px;
 }
-.p{
-  width:10px;
-  margin:0px
+.p {
+  width: 10px;
+  margin: 0px;
 }
-.w5{
+.w5 {
   width: 50%;
   margin: 0px;
+}
+.w20 {
+  background-color: aliceblue;
+  width: 65%;
+  padding: 20%;
+  border: rgb(97, 97, 97) 2px solid;
+  box-shadow: 0 1px 3px 2px rgb(0 0 0 / 12%), 0 1px 2px 2px rgb(0 0 0 / 24%);
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
 }

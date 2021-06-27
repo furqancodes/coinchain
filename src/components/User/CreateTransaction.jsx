@@ -15,13 +15,15 @@ const CreateTransaction = ({
   const [value, setValue] = useState(0);
   const onAmountSubmit = async (e) => {
     e.preventDefault();
-    const response = await sendAmount({
-      amount: value,
-      senderEmail,
-      recipientEmail,
-    });
-    setResponseCode(response.status);
-    console.log(response);
+    if (value > 0) {
+      const response = await sendAmount({
+        amount: value,
+        senderEmail,
+        recipientEmail,
+      });
+      setResponseCode(response.status);
+      console.log(response);
+    }
   };
   const checkAmount = () => {
     if (value > wallet.balance || !value) {

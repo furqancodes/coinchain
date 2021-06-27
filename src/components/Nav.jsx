@@ -4,7 +4,7 @@ import UserApi from "./Api/UserApi";
 
 import "../css/Navigation.css";
 
-const Nav = ({ login, setData, setToken, setWallet, token }) => {
+const Nav = ({ login, setError, setData, setToken, setWallet, token }) => {
   const toggle = () => {
     if (!login) {
       return (
@@ -48,7 +48,14 @@ const Nav = ({ login, setData, setToken, setWallet, token }) => {
                 <li>Signup</li>
               </Link>
               <Link to="/login" class="item">
-                <li>Login</li>
+                <li
+                  onClick={() => {
+                    setError("");
+                    setData("");
+                  }}
+                >
+                  Login
+                </li>
               </Link>
             </div>
           </ul>
