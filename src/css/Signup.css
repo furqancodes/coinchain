@@ -1,9 +1,6 @@
 .column {
   max-width: 450px;
 }
-body {
-  background-image: url("./imgs/bgimg.jpg");
-}
 .width-50 {
   background-color: aliceblue;
   width: 70%;
