@@ -65,6 +65,7 @@ const Beneficiary = ({
   const onDelete = async (beneficiary) => {
     const response = await deleteBeneficiary(beneficiary);
     if (response.data) {
+      setMessage("Beneficiary deleted")
       setData(response.data);
     }
   };
