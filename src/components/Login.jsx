@@ -8,11 +8,14 @@ const Login = ({ onlogin, view }) => {
   const [password, setPassword] = useState("");
   const onFormSubmit = (e) => {
     e.preventDefault();
-    console.log(email);
+    // console.log(email);
     onlogin({ email, password });
   };
   return (
-    <div class="ui container">
+    <div
+      class="ui container"
+      style={{ marginTop: "84px", marginBottom: "84px" }}
+    >
       <div class="ui middle aligned center aligned grid">
         <div class="column">
           <h2 class="ui image header">
@@ -52,7 +55,7 @@ const Login = ({ onlogin, view }) => {
                 Login
               </button>
             </div>
-            {view({ message: "Signed in" })}
+            {view("Signed in")}
             <div class="ui error message"></div>
           </form>
 

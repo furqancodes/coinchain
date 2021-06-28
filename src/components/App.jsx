@@ -9,6 +9,7 @@ import Profile from "./User/Profile";
 import Beneficiary from "./User/Beneficiary";
 import Transactions from "./User/Transactions";
 import CreateTransaction from "./User/CreateTransaction";
+import Footer from "./Footer";
 // import Logout from "./Logout";
 
 import {
@@ -38,15 +39,17 @@ const App = () => {
       setData(response.data.user);
       console.log(response);
     } catch (error) {
-      console.log(error.response.data);
-      if (error.response.data) {
-        setError("Email Already exists");
-        setData("");
-      } else {
-        console.log(error.response);
-        setError(error.response.data.message);
-        setData("");
-      }
+      console.log(error.response);
+      setError(error.response.data.Error);
+      setData("");
+      // if (error.response.data) {
+      //   setError("Email Already exists");
+      //   setData("");
+      // } else {
+      //   console.log(error.response);
+      //   setError(error.response.data.message);
+      //   setData("");
+      // }
     }
   };
   const onlogin = async ({ email, password }) => {
@@ -55,8 +58,8 @@ const App = () => {
         email,
         password,
       });
-      console.log("LOGGED IN");
-      console.log(response.data);
+      // console.log("LOGGED IN");
+      // console.log(response.data);
       setData(response.data.user);
       setToken(response.data.token);
     } catch (error) {
@@ -64,7 +67,7 @@ const App = () => {
       //   setError("Email Already exists");
       //   setData("");
       // } else {
-      setError("some error occurred");
+      setError(error.response.data.Error);
       // }
     }
   };
@@ -114,7 +117,8 @@ const App = () => {
 
       return response;
     } catch (error) {
-      console.log(error);
+      setError(error.response.data);
+      console.log(error.response.data);
     }
 
     // setData(response.data)
@@ -176,8 +180,8 @@ const App = () => {
       console.log(error);
     }
   };
-  const userData = ({ message }) => {
-    if (data && !error && message) {
+  const userData = (message) => {
+    if (data && message) {
       return (
         <div class="ui positive message four wide">
           <i class="close icon"></i>
@@ -187,7 +191,7 @@ const App = () => {
           </p>
         </div>
       );
-    } else if (error) {
+    } else if (error && !message) {
       return (
         <div class="ui negative message four wide">
           <i class="close icon"></i>
@@ -207,6 +211,7 @@ const App = () => {
           setToken={setToken}
           setWallet={setWallet}
           token={token}
+          data={data}
         />
         <Switch>
           <Route path="/" exact component={Home} />
@@ -214,7 +219,12 @@ const App = () => {
             {token ? (
               <Redirect to="/user/profile" />
             ) : (
-              <Login setError={setError} onlogin={onlogin} view={userData} />
+              <Login
+                error={error}
+                setError={setError}
+                onlogin={onlogin}
+                view={userData}
+              />
             )}
           </Route>
           <Route path="/signup">
@@ -222,6 +232,7 @@ const App = () => {
               onformSubmit={onformSubmit}
               view={userData}
               setError={setError}
+              error={error}
             />
           </Route>
           <Route path="/user/profile">
@@ -236,9 +247,11 @@ const App = () => {
               <Redirect to="/" />
             ) : (
               <Beneficiary
+                error={error}
                 data={data}
                 token={token}
                 setData={setData}
+                userData={userData}
                 allUsers={allUsers}
                 setAllUsers={setAllUsers}
                 addBeneficiary={addBeneficiary}
@@ -264,6 +277,7 @@ const App = () => {
           </Route>
           {/* {console.log(transactionData)} */}
         </Switch>
+        <Footer />
       </div>
     </Router>
   );

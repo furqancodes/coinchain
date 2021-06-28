@@ -4,7 +4,15 @@ import UserApi from "./Api/UserApi";
 
 import "../css/Navigation.css";
 
-const Nav = ({ login, setError, setData, setToken, setWallet, token }) => {
+const Nav = ({
+  login,
+  setError,
+  setData,
+  setToken,
+  setWallet,
+  token,
+  data,
+}) => {
   const toggle = () => {
     if (!login) {
       return (
@@ -35,17 +43,29 @@ const Nav = ({ login, setError, setData, setToken, setWallet, token }) => {
         //     </ul>
         //   </div>
         // </nav>
-        <nav class="ui inverted menu">
+        <nav class="ui fixed ui inverted menu">
           <div className="logo">
             <h2>CoinChain</h2>
           </div>
           <ul class="nav-links">
             <Link to="/" class="item">
-              <li>Home</li>
+              <li
+                onClick={() => {
+                  setError("");
+                }}
+              >
+                Home
+              </li>
             </Link>
             <div class="right menu">
               <Link to="/signup" class="item">
-                <li>Signup</li>
+                <li
+                  onClick={() => {
+                    setError("");
+                  }}
+                >
+                  Signup
+                </li>
               </Link>
               <Link to="/login" class="item">
                 <li
@@ -109,23 +129,47 @@ const Nav = ({ login, setError, setData, setToken, setWallet, token }) => {
         //     </ul>
         //   </div>
         // </nav>
-        <nav class="ui inverted menu">
+        <nav class="ui fixed ui inverted menu">
           <div className="logo">
             <h2>CoinChain</h2>
           </div>
           <ul class="nav-links">
             <Link to="/" class="item">
-              <li>Home</li>
+              <li
+                onClick={() => {
+                  setError("");
+                }}
+              >
+                Home
+              </li>
             </Link>
             <Link to="/beneficiary" class="item">
-              <li>Beneficiary</li>
+              <li
+                onClick={() => {
+                  setError("");
+                }}
+              >
+                Beneficiary
+              </li>
             </Link>
             <Link to="/transactions" class="item">
-              <li>Transactions</li>
+              <li
+                onClick={() => {
+                  setError("");
+                }}
+              >
+                Transactions
+              </li>
             </Link>
             <div class="right menu">
               <Link to="/user/profile" class="item">
-                <li>Profile</li>
+                <li
+                  onClick={() => {
+                    setError("");
+                  }}
+                >
+                  {data.name}
+                </li>
               </Link>
               <Link to="/" class="item">
                 <li onClick={setNull}>Logout</li>

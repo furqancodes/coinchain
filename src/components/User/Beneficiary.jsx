@@ -3,10 +3,12 @@ import { Link } from "react-router-dom";
 import "../../css/Signup.css";
 
 const Beneficiary = ({
+  error,
   data,
   token,
   activate,
   setData,
+  userData,
   getUsers,
   allUsers,
   setAllUsers,
@@ -15,6 +17,7 @@ const Beneficiary = ({
   deleteBeneficiary,
   setTransactionData,
 }) => {
+  const [message, setMessage] = useState("");
   useEffect(() => {
     // const getAllUsers = async () => {
     //   const response = await
@@ -47,6 +50,7 @@ const Beneficiary = ({
     try {
       const response = await addBeneficiary(inputValue, token);
       setData(response.data);
+      setMessage("beneficiary added");
       // console.log("add beneficiary");
       // console.log(response);
       if (response.data) {
@@ -54,6 +58,7 @@ const Beneficiary = ({
       }
       setInputValue("");
     } catch (error) {
+      setMessage("");
       console.log(error);
     }
   };
@@ -164,6 +169,8 @@ const Beneficiary = ({
             paddingBottom: "23px",
           }}
         >
+          {userData(message)}
+
           <div class="center">
             <form class="addform" onSubmit={onSubmit}>
               <div className="field wf">
@@ -234,7 +241,11 @@ const Beneficiary = ({
       );
     }
   };
-  return <div> {renderType()}</div>;
+  return (
+    <div style={{ marginTop: "84px", marginBottom: "84px" }}>
+      {renderType()}
+    </div>
+  );
 };
 
 export default Beneficiary;

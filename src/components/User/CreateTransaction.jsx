@@ -145,7 +145,11 @@ const CreateTransaction = ({
       );
     }
   };
-  return <div>{conditionalRendering()}</div>;
+  return (
+    <div style={{ marginTop: "84px", marginBottom: "84px" }}>
+      {conditionalRendering()}
+    </div>
+  );
 };
 
 export default CreateTransaction;

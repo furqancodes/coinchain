@@ -9,7 +9,10 @@ const Profile = ({ data, userProfile, wallet }) => {
     userProfile();
   }, []);
   return (
-    <div class="h ui container top-10">
+    <div
+      class="h ui container top-10"
+      style={{ marginTop: "84px", marginBottom: "84px" }}
+    >
       <div class="h ui middle aligned center aligned grid">
         <div class="ui card h">
           <div class="content">

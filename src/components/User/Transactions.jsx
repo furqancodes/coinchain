@@ -21,7 +21,6 @@ const Transactions = ({ getTransactions, wallet }) => {
     responseFunc();
     // setTransactions(response.data.transactionsList);
   }, []);
-
   const conditionalRendering = () => {
     if (transactions.length > 0) {
       return transactions.map((transaction) => {
@@ -35,11 +34,15 @@ const Transactions = ({ getTransactions, wallet }) => {
                     backgroundColor: "#feb9b9",
                     paddingTop: "23px",
                     paddingBottom: "23px",
+                    marginTop: "20px",
+                    marginBottom: "20px",
                   }
                 : {
                     backgroundColor: "#b9db92",
                     paddingTop: "23px",
                     paddingBottom: "23px",
+                    marginTop: "20px",
+                    marginBottom: "20px",
                   }
             }
           >
@@ -69,9 +72,19 @@ const Transactions = ({ getTransactions, wallet }) => {
     }
   };
   return (
-    <div class="ui container" style={{ width: "57%", paddingTop: "35px" }}>
+    <div
+      class="ui container"
+      style={{
+        width: "57%",
+        paddingTop: "35px",
+        marginTop: "84px",
+        marginBottom: "120px",
+      }}
+    >
       <div class="ui middle aligned center aligned grid">
-        <div class="ui celled list w20">{conditionalRendering()}</div>
+        <div class="ui celled list w20" style={{ marginBottom: "165px" }}>
+          {conditionalRendering()}
+        </div>
       </div>
     </div>
   );

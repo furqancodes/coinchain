@@ -19,7 +19,10 @@ const Signup = ({ onformSubmit, view, setError }) => {
     }
   };
   return (
-    <div class="ui container">
+    <div
+      class="ui container"
+      style={{ marginTop: "84px", marginBottom: "84px" }}
+    >
       <div class="ui middle aligned center aligned grid">
         <div class="column">
           <h2 class="ui image header">
@@ -76,7 +79,7 @@ const Signup = ({ onformSubmit, view, setError }) => {
                 Sign Up
               </button>
             </div>
-            {view({ message: "account is created" })}
+            {view("account is created")}
             <div class="ui error message"></div>
           </form>
           <div class="ui message">
