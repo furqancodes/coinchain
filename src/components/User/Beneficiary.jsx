@@ -201,8 +201,14 @@ const Beneficiary = ({
       );
     } else {
       return (
-        <div class="ui container">
-          <div
+<div
+          class="ui container h addinput"
+          style={{
+            backgroundColor: "whitesmoke",
+            paddingTop: "23px",
+            paddingBottom: "23px",
+          }}
+        >          <div
             class="center"
             style={{
               backgroundColor: "white",
