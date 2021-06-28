@@ -8,14 +8,16 @@ const Signup = ({ onformSubmit, view, setError }) => {
   const [age, setAge] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [address, setAddress] = useState("");
+
   const onFormSubmit = (e) => {
     e.preventDefault();
-    if (name === "" || age === "" || email === "" || password === "") {
+    if (name === "" || age === "" || email === "" || password === ""||address==="") {
       setError("Please complete form");
     } else {
       setError("");
 
-      onformSubmit({ name, email, age, password });
+      onformSubmit({ name, email, age, password,address });
     }
   };
   return (
@@ -60,6 +62,16 @@ const Signup = ({ onformSubmit, view, setError }) => {
                   placeholder="Enter email"
                   onChange={(e) => {
                     setEmail(e.target.value);
+                  }}
+                />
+              </div>
+              <div class="required field">
+                <input
+                  type="text"
+                  value={address}
+                  placeholder="Enter Address"
+                  onChange={(e) => {
+                    setAddress(e.target.value);
                   }}
                 />
               </div>

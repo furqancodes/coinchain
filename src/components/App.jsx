@@ -28,13 +28,14 @@ const App = () => {
   const [allUsers, setAllUsers] = useState("");
 
   // console.log(error);
-  const onformSubmit = async ({ name, age, email, password }) => {
+  const onformSubmit = async ({ name, age, email, password ,address}) => {
     try {
       const response = await UserApi.post("/signup", {
         name,
         email,
         age,
         password,
+        address
       });
       setData(response.data.user);
       console.log(response);

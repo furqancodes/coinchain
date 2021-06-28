@@ -21,7 +21,7 @@ const Profile = ({ data, userProfile, wallet }) => {
               <span class="date">Age {data.age}</span>
             </div>
             <div class="description">
-              {data.name} is an art director living in New York.
+              {data.address} .
             </div>
           </div>
           <div class="extra content">Balance {wallet.balance}</div>
