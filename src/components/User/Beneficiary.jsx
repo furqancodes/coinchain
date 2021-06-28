@@ -5,9 +5,11 @@ import "../../css/Signup.css";
 const Beneficiary = ({
   data,
   token,
+  activate,
   setData,
   getUsers,
   allUsers,
+  setAllUsers,
   userProfile,
   addBeneficiary,
   deleteBeneficiary,
@@ -25,11 +27,20 @@ const Beneficiary = ({
       console.log(allUsers);
     }
   }, []);
+  const [inputValue, setInputValue] = useState("");
+
   const onSearch = async (e) => {
     e.preventDefault();
+    console.log(allUsers);
+    const searchedUser = allUsers.find((user) => {
+      return user.email === inputValue;
+    });
+    console.log(searchedUser);
+    if (searchedUser) {
+      setAllUsers([searchedUser]);
+    }
   };
   // console.log(data);
-  const [inputValue, setInputValue] = useState("");
   const onSubmit = async (e) => {
     e.preventDefault();
 
@@ -66,14 +77,22 @@ const Beneficiary = ({
                   });
                   userProfile();
                 }}
-                class="ui right floated blue small button"
+                class={
+                  data.activated
+                    ? "ui right floated blue small button"
+                    : "ui  right floated black disabled button"
+                }
               >
                 Transact
               </button>
             </Link>
             <button
               onClick={() => onDelete(block.beneficiary)}
-              class="ui right floated red small button"
+              class={
+                data.activated
+                  ? "ui right floated red small button"
+                  : "ui  right floated black disabled button"
+              }
             >
               Delete
             </button>
@@ -109,16 +128,21 @@ const Beneficiary = ({
                 Transact
               </button>
             </Link>
-            <button
-              type="submit"
-              class={
-                block.activated
-                  ? "ui right floated teal ui disabled button"
-                  : "ui right floated teal small button"
-              }
-            >
-              Activate
-            </button>
+            <Link to="/user/profile">
+              <button
+                type="submit"
+                class={
+                  block.activated
+                    ? "ui right floated teal ui disabled button"
+                    : "ui right floated teal small button"
+                }
+                onClick={() => {
+                  activate(block.email);
+                }}
+              >
+                Activate
+              </button>
+            </Link>
 
             <div class="content w5">
               <p class="p">{block.email}</p>
@@ -132,30 +156,45 @@ const Beneficiary = ({
   const renderType = () => {
     if (data.userType === "User") {
       return (
-        <div class="center">
-          <form class="addform" onSubmit={onSubmit}>
-            <div className="field wf">
-              <input
-                class="addinput"
-                onChange={(e) => {
-                  setInputValue(e.target.value);
-                }}
-                value={inputValue}
-                type="email"
-                placeholder="Beneficiary Email"
-              ></input>
-              <button class=" ui right floated blue small button ">
-                Add Beneficiary
-              </button>
-            </div>
-          </form>
-          <div class="ui celled list width-50">{renderBeneficiary()}</div>
+        <div
+          class="ui container h addinput"
+          style={{
+            backgroundColor: "whitesmoke",
+            paddingTop: "23px",
+            paddingBottom: "23px",
+          }}
+        >
+          <div class="center">
+            <form class="addform" onSubmit={onSubmit}>
+              <div className="field wf">
+                <input
+                  class="addinput"
+                  onChange={(e) => {
+                    setInputValue(e.target.value);
+                  }}
+                  value={inputValue}
+                  type="email"
+                  placeholder="Beneficiary Email"
+                ></input>
+                <button
+                  class={
+                    data.activated
+                      ? " ui right floated blue small button "
+                      : "ui  right floated black disabled button"
+                  }
+                >
+                  Add Beneficiary
+                </button>
+              </div>
+            </form>
+            <div class="ui celled list width-50">{renderBeneficiary()}</div>
+          </div>
         </div>
       );
     } else {
       return (
-        <div>
-          <div class="center">
+        <div class="ui container">
+          <div class="center" style={{ backgroundColor: "white" }}>
             <form class="addform" onSubmit={onSearch}>
               <div className="field wf">
                 <input

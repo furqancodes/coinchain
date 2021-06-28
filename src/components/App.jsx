@@ -77,9 +77,9 @@ const App = () => {
       });
       setAllUsers(response.data);
 
-      setTimeout(() => {
-        console.log(allUsers);
-      }, 1000);
+      // etTimeout(() => {
+      //   console.log(allUsers);
+      // }, 1000);s
       //
     } catch (error) {
       console.log(error.response);
@@ -161,7 +161,21 @@ const App = () => {
     );
     return response;
   };
-
+  const activate = async (userEmail) => {
+    try {
+      const response = await UserApi.patch(
+        "/admin/" + userEmail,
+        { activated: true },
+        {
+          headers: {
+            authorization: `Bearer ${token}`,
+          },
+        }
+      );
+    } catch (error) {
+      console.log(error);
+    }
+  };
   const userData = ({ message }) => {
     if (data && !error && message) {
       return (
@@ -226,11 +240,13 @@ const App = () => {
                 token={token}
                 setData={setData}
                 allUsers={allUsers}
+                setAllUsers={setAllUsers}
                 addBeneficiary={addBeneficiary}
                 deleteBeneficiary={deleteBeneficiary}
                 setTransactionData={setTransactionData}
                 userProfile={userProfile}
                 getUsers={getUsers}
+                activate={activate}
               />
             )}
           </Route>
