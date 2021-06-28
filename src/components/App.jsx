@@ -24,6 +24,8 @@ const App = () => {
   const [token, setToken] = useState("");
   const [error, setError] = useState("");
   const [transactionData, setTransactionData] = useState({});
+  const [allUsers, setAllUsers] = useState("");
+
   // console.log(error);
   const onformSubmit = async ({ name, age, email, password }) => {
     try {
@@ -64,6 +66,23 @@ const App = () => {
       // } else {
       setError("some error occurred");
       // }
+    }
+  };
+  const getUsers = async () => {
+    try {
+      const response = await UserApi.get("/all", {
+        headers: {
+          authorization: `Bearer ${token}`,
+        },
+      });
+      setAllUsers(response.data);
+
+      setTimeout(() => {
+        console.log(allUsers);
+      }, 1000);
+      //
+    } catch (error) {
+      console.log(error.response);
     }
   };
   const userProfile = async () => {
@@ -206,10 +225,12 @@ const App = () => {
                 data={data}
                 token={token}
                 setData={setData}
+                allUsers={allUsers}
                 addBeneficiary={addBeneficiary}
                 deleteBeneficiary={deleteBeneficiary}
                 setTransactionData={setTransactionData}
                 userProfile={userProfile}
+                getUsers={getUsers}
               />
             )}
           </Route>
@@ -218,6 +239,7 @@ const App = () => {
           </Route>
           <Route path="/createtransaction">
             <CreateTransaction
+              data={data}
               sendAmount={sendAmount}
               transactionData={transactionData}
               wallet={wallet}

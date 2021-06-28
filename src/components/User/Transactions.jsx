@@ -23,7 +23,7 @@ const Transactions = ({ getTransactions, wallet }) => {
   }, []);
 
   const conditionalRendering = () => {
-    if (transactions) {
+    if (transactions.length > 0) {
       return transactions.map((transaction) => {
         // console.log(transaction);
         return (

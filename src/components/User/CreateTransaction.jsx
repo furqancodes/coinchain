@@ -6,6 +6,7 @@ const CreateTransaction = ({
   sendAmount,
   transactionData,
   wallet,
+  data,
 }) => {
   const { senderEmail, recipientEmail } = transactionData;
   // console.log("transaction data");
@@ -26,12 +27,42 @@ const CreateTransaction = ({
     }
   };
   const checkAmount = () => {
-    if (value > wallet.balance || !value) {
+    if (data.userType === "User") {
+      if (value > wallet.balance || !value) {
+        return (
+          <div>
+            <h2>Amount is Invalid</h2>
+            Please Enter Valid Amount
+          </div>
+        );
+      }
+    }
+  };
+  const Input = () => {
+    if (data.userType === "User") {
       return (
-        <div>
-          <h2>Amount is Invalid</h2>
-          Please Enter Valid Amount
-        </div>
+        <input
+          type="number"
+          name="value"
+          value={value}
+          min="0"
+          max={wallet.balance}
+          onChange={(e) => {
+            setValue(e.target.value);
+          }}
+        />
+      );
+    } else {
+      return (
+        <input
+          type="number"
+          name="value"
+          value={value}
+          min="0"
+          onChange={(e) => {
+            setValue(e.target.value);
+          }}
+        />
       );
     }
   };
@@ -86,25 +117,17 @@ const CreateTransaction = ({
               >
                 <div class="ui stacked secondary segment">
                   <h3>Transaction</h3>
-                  <div class="required field">
-                    <input
-                      type="number"
-                      name="value"
-                      value={value}
-                      min="0"
-                      max={wallet.balance}
-                      onChange={(e) => {
-                        setValue(e.target.value);
-                      }}
-                    />
-                  </div>
+                  <div class="required field"></div>
                   <h3>Recipient: {recipientEmail}</h3>
                   <h3>Remaining Balance will be {wallet.balance - value}</h3>
-
+                  {Input()}
                   <button
                     type="submit"
                     class={
-                      value > wallet.balance || !value || wallet.balance === 0
+                      (data.userType === "User" && value > wallet.balance) ||
+                      !value ||
+                      value < 0 ||
+                      (data.userType === "User" && wallet.balance === 0)
                         ? "ui disabled button"
                         : "ui fluid large black submit button"
                     }
