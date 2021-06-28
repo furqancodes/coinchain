@@ -194,10 +194,27 @@ const Beneficiary = ({
     } else {
       return (
         <div class="ui container">
-          <div class="center" style={{ backgroundColor: "white" }}>
+          <div
+            class="center"
+            style={{
+              backgroundColor: "white",
+              paddingTop: "23px",
+              paddingBottom: "23px",
+            }}
+          >
             <form class="addform" onSubmit={onSearch}>
               <div className="field wf">
                 <input
+                  onChange={(e) => {
+                    setInputValue(e.target.value);
+                  }}
+                  value={inputValue}
+                  type="email"
+                  class="prompt"
+                  placeholder="Search User"
+                />
+
+                {/* <input
                   class="addinput"
                   onChange={(e) => {
                     setInputValue(e.target.value);
@@ -205,7 +222,7 @@ const Beneficiary = ({
                   value={inputValue}
                   type="email"
                   placeholder="Search User"
-                ></input>
+                ></input> */}
                 <button class=" ui right floated blue small button ">
                   Search User
                 </button>

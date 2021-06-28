@@ -1,6 +1,9 @@
 .column {
   max-width: 450px;
 }
+body {
+  background-image: url("./imgs/bgimg.jpg");
+}
 .width-50 {
   background-color: aliceblue;
   width: 70%;
@@ -16,7 +19,6 @@
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  border: springgreen 2px solid;
 }
 .shift-left {
   padding: 0%;
