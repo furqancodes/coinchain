@@ -31,8 +31,16 @@ const Transactions = ({ getTransactions, wallet }) => {
             class="item"
             style={
               transaction.type === "Debit"
-                ? { backgroundColor: "#feb9b9" }
-                : { backgroundColor: "#b9db92" }
+                ? {
+                    backgroundColor: "#feb9b9",
+                    paddingTop: "23px",
+                    paddingBottom: "23px",
+                  }
+                : {
+                    backgroundColor: "#b9db92",
+                    paddingTop: "23px",
+                    paddingBottom: "23px",
+                  }
             }
           >
             <h2 style={{ fontWeight: 500, textAlign: "center" }}>
@@ -61,7 +69,7 @@ const Transactions = ({ getTransactions, wallet }) => {
     }
   };
   return (
-    <div class="ui container" style={{ width: "57%" }}>
+    <div class="ui container" style={{ width: "57%", paddingTop: "35px" }}>
       <div class="ui middle aligned center aligned grid">
         <div class="ui celled list w20">{conditionalRendering()}</div>
       </div>
