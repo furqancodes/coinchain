@@ -23,52 +23,31 @@ const Transactions = ({ getTransactions, wallet }) => {
   }, []);
   const conditionalRendering = () => {
     if (transactions.length > 0) {
-      return transactions.slice(0).reverse().map((transaction) => {
-        // console.log(transaction);
-        return (
-          <div
-            class="item"
-            style={
-              transaction.type === "Debit"
-                ? {
-                    backgroundColor: "#feb9b9",
-                    paddingTop: "23px",
-                    paddingBottom: "23px",
-                    marginTop: "20px",
-                    marginBottom: "20px",
-                  }
-                : {
-                    backgroundColor: "#b9db92",
-                    paddingTop: "23px",
-                    paddingBottom: "23px",
-                    marginTop: "20px",
-                    marginBottom: "20px",
-                  }
-            }
-          >
-            <h2 style={{ fontWeight: 500, textAlign: "center" }}>
-              {transaction.type}
-            </h2>
-            <h3 style={{ fontWeight: 100 }} class="content item">
-              To: {transaction.receiver}
-            </h3>
-            <h3 style={{ fontWeight: 100 }} class="content item">
-              From: {transaction.sender}
-            </h3>
-            <h3 style={{ fontWeight: 100 }} class="content item">
-              Amount: {transaction.amount}
-            </h3>
-            <h3 style={{ fontWeight: 100 }} class="content item">
-              Date: {transaction.date}
-            </h3>
-            <h3 style={{ fontWeight: 100 }} class="content item">
-              Time: {transaction.time}
-            </h3>
-          </div>
-        );
-      });
+      return transactions
+        .slice(0)
+        .reverse()
+        .map((transaction) => {
+          // console.log(transaction);
+          return (
+            <tr class={transaction.type === "Debit" ? "negative" : "postive"}>
+              <td>{transaction.receiver}</td>
+              <td>{transaction.type}</td>
+              <td>{transaction.amount}</td>
+              <td>{transaction.time}</td>
+              <td>{transaction.date}</td>
+            </tr>
+          );
+        });
     } else {
-      return <div>no transactions</div>;
+      return (
+        <tr class="negative">
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+        </tr>
+      );
     }
   };
   return (
@@ -83,7 +62,18 @@ const Transactions = ({ getTransactions, wallet }) => {
     >
       <div class="ui middle aligned center aligned grid">
         <div class="ui celled list w20" style={{ marginBottom: "165px" }}>
-          {conditionalRendering()}
+          <table class="ui celled table">
+            <thead>
+              <tr>
+                <th>Address</th>
+                <th>Type</th>
+                <th>Amount</th>
+                <th>Time</th>
+                <th>Date</th>
+              </tr>
+            </thead>
+            <tbody>{conditionalRendering()}</tbody>
+          </table>
         </div>
       </div>
     </div>
