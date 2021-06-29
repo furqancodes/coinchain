@@ -27,10 +27,14 @@ const Transactions = ({ getTransactions, wallet }) => {
         .slice(0)
         .reverse()
         .map((transaction) => {
+          const fromto =
+            transaction.type === "Debit"
+              ? transaction.receiver
+              : transaction.sender;
           // console.log(transaction);
           return (
             <tr class={transaction.type === "Debit" ? "negative" : "positive"}>
-              <td>{transaction.receiver}</td>
+              <td>{fromto}</td>
               <td>{transaction.type}</td>
               <td>{transaction.amount}</td>
               <td>{transaction.time}</td>

@@ -63,12 +63,13 @@ const App = () => {
       // console.log(response.data);
       setData(response.data.user);
       setToken(response.data.token);
-    } catch (error) {
+    } catch (e) {
+      console.log(error);
       // if (error.response.data.code === 11000) {
       //   setError("Email Already exists");
       //   setData("");
       // } else {
-      setError(error.response.data.Error);
+      setError(e.response.data.Error);
       // }
     }
   };
@@ -192,7 +193,7 @@ const App = () => {
           </p>
         </div>
       );
-    } else if (error && !message) {
+    } else if (error) {
       return (
         <div class="ui negative message four wide">
           <i class="close icon"></i>
