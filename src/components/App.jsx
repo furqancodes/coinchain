@@ -28,14 +28,14 @@ const App = () => {
   const [allUsers, setAllUsers] = useState("");
 
   // console.log(error);
-  const onformSubmit = async ({ name, age, email, password ,address}) => {
+  const onformSubmit = async ({ name, age, email, password, address }) => {
     try {
       const response = await UserApi.post("/signup", {
         name,
         email,
         age,
         password,
-        address
+        address,
       });
       setData(response.data.user);
       console.log(response);
@@ -166,11 +166,11 @@ const App = () => {
     );
     return response;
   };
-  const activate = async (userEmail) => {
+  const activate = async (userEmail, toggle) => {
     try {
       const response = await UserApi.patch(
         "/admin/" + userEmail,
-        { activated: true },
+        { activated: toggle },
         {
           headers: {
             authorization: `Bearer ${token}`,

@@ -29,7 +29,7 @@ const Transactions = ({ getTransactions, wallet }) => {
         .map((transaction) => {
           // console.log(transaction);
           return (
-            <tr class={transaction.type === "Debit" ? "negative" : "postive"}>
+            <tr class={transaction.type === "Debit" ? "negative" : "positive"}>
               <td>{transaction.receiver}</td>
               <td>{transaction.type}</td>
               <td>{transaction.amount}</td>
@@ -60,8 +60,16 @@ const Transactions = ({ getTransactions, wallet }) => {
         marginBottom: "120px",
       }}
     >
+      {/* <button
+        class="ui right floated blue small button"
+        onclick={() => {
+          window.print();
+        }}
+      >
+        Print
+      </button> */}
       <div class="ui middle aligned center aligned grid">
-        <div class="ui celled list w20" style={{ marginBottom: "165px" }}>
+        <div style={{ marginBottom: "165px" }}>
           <table class="ui celled table">
             <thead>
               <tr>

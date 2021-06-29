@@ -65,7 +65,7 @@ const Beneficiary = ({
   const onDelete = async (beneficiary) => {
     const response = await deleteBeneficiary(beneficiary);
     if (response.data) {
-      setMessage("Beneficiary deleted")
+      setMessage("Beneficiary deleted");
       setData(response.data);
     }
   };
@@ -201,14 +201,15 @@ const Beneficiary = ({
       );
     } else {
       return (
-<div
+        <div
           class="ui container h addinput"
           style={{
             backgroundColor: "whitesmoke",
             paddingTop: "23px",
             paddingBottom: "23px",
           }}
-        >          <div
+        >
+          <div
             class="center"
             style={{
               backgroundColor: "white",
